@@ -1,5 +1,6 @@
 package org.ortynskyi.hobbyfun.core.recipes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import org.ortynskyi.hobbyfun.R;
 import org.ortynskyi.hobbyfun.base.BaseFragment;
 import org.ortynskyi.hobbyfun.core.recipes.adapter.RecipeAdapter;
 import org.ortynskyi.hobbyfun.core.recipes.domain.dto.Recipe;
+import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipeListCallback;
 import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipePresenter;
 import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipePresenterImpl;
 import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipeView;
@@ -22,9 +24,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public final class RecipeListFragment extends BaseFragment implements RecipeView {
+public final class RecipeListFragment extends BaseFragment implements RecipeView, RecipeListCallback {
 
     private static final String PIZZA = "pizza";
+    public static final String EXTRA_RECIPE_ID = "EXTRA_RECIPE_ID";
 
     @BindView(R.id.recipesRecycle) RecyclerView recipesRecycle;
 
@@ -56,8 +59,16 @@ public final class RecipeListFragment extends BaseFragment implements RecipeView
     }
 
     private void initAdapter() {
-        adapter = new RecipeAdapter();
+        adapter = new RecipeAdapter(this);
         recipesRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
         recipesRecycle.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(final int position) {
+        final Recipe recipe = adapter.getRecipe(position);
+        final Intent intent = new Intent(getContext(), RecipeDetailActivity.class);
+        intent.putExtra(EXTRA_RECIPE_ID, recipe.getRecipeId());
+        startActivity(intent);
     }
 }
