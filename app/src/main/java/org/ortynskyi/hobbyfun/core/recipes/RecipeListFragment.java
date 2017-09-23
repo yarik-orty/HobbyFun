@@ -58,17 +58,17 @@ public final class RecipeListFragment extends BaseFragment implements RecipeView
         adapter.setRecipes(recipes);
     }
 
-    private void initAdapter() {
-        adapter = new RecipeAdapter(this);
-        recipesRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
-        recipesRecycle.setAdapter(adapter);
-    }
-
     @Override
     public void onClick(final int position) {
         final Recipe recipe = adapter.getRecipe(position);
         final Intent intent = new Intent(getContext(), RecipeDetailActivity.class);
         intent.putExtra(EXTRA_RECIPE_ID, recipe.getRecipeId());
         startActivity(intent);
+    }
+
+    private void initAdapter() {
+        adapter = new RecipeAdapter(this);
+        recipesRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
+        recipesRecycle.setAdapter(adapter);
     }
 }
