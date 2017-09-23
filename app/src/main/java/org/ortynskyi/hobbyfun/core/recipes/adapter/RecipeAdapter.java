@@ -12,8 +12,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import org.ortynskyi.hobbyfun.R;
+import org.ortynskyi.hobbyfun.base.OnItemClickListener;
 import org.ortynskyi.hobbyfun.core.recipes.domain.dto.Recipe;
-import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipeListCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,16 +24,16 @@ import butterknife.ButterKnife;
 public final class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     private final List<Recipe> recipes = new ArrayList<>();
-    private final RecipeListCallback callback;
+    private final OnItemClickListener listener;
 
-    public RecipeAdapter(@NonNull final RecipeListCallback callback) {
-        this.callback = callback;
+    public RecipeAdapter(@NonNull final OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         return new ViewHolder(LayoutInflater.from(
-                parent.getContext()).inflate(R.layout.item_recipe, parent, false), callback);
+                parent.getContext()).inflate(R.layout.item_recipe, parent, false), listener);
     }
 
     @Override
@@ -66,10 +66,10 @@ public final class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.View
         @BindView(R.id.recipeRating) TextView recipeRating;
         @BindView(R.id.recipeImage) ImageView recipeImage;
 
-        public ViewHolder(final View itemView, @NonNull final RecipeListCallback callback) {
+        public ViewHolder(@NonNull final View itemView, @NonNull final OnItemClickListener listener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            recipeCard.setOnClickListener(view -> callback.onClick(getAdapterPosition()));
+            recipeCard.setOnClickListener(view -> listener.onItemClick(getAdapterPosition()));
         }
     }
 }

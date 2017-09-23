@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 
 import org.ortynskyi.hobbyfun.R;
 import org.ortynskyi.hobbyfun.base.BaseFragment;
+import org.ortynskyi.hobbyfun.base.OnItemClickListener;
 import org.ortynskyi.hobbyfun.core.recipes.adapter.RecipeAdapter;
 import org.ortynskyi.hobbyfun.core.recipes.domain.dto.Recipe;
-import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipeListCallback;
 import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipePresenter;
 import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipePresenterImpl;
 import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipeView;
@@ -26,7 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public final class RecipeListFragment extends BaseFragment implements RecipeView, RecipeListCallback {
+public final class RecipeListFragment extends BaseFragment implements RecipeView, OnItemClickListener {
 
     public static final String EXTRA_RECIPE_ID = "EXTRA_RECIPE_ID";
 
@@ -63,7 +63,7 @@ public final class RecipeListFragment extends BaseFragment implements RecipeView
     }
 
     @Override
-    public void onClick(final int position) {
+    public void onItemClick(final int position) {
         final Recipe recipe = adapter.getRecipe(position);
         final Intent intent = new Intent(getContext(), RecipeDetailActivity.class);
         intent.putExtra(EXTRA_RECIPE_ID, recipe.getRecipeId());
