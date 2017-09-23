@@ -5,19 +5,16 @@ import android.util.Log;
 
 import org.ortynskyi.hobbyfun.core.recipes.domain.RecipeInteractor;
 import org.ortynskyi.hobbyfun.core.recipes.domain.RecipeInteractorImpl;
-import org.ortynskyi.hobbyfun.core.recipes.domain.dto.Recipe;
-import org.ortynskyi.hobbyfun.utils.Constants;
 
-import java.util.List;
-
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 public final class RecipePresenterImpl implements RecipePresenter {
 
     private static final String TAG = "RecipePresenterImpl";
 
+    private final CompositeSubscription subscriptions = new CompositeSubscription();
     private final RecipeInteractor interactor;
     private RecipeView view;
 
@@ -27,30 +24,16 @@ public final class RecipePresenterImpl implements RecipePresenter {
 
     @Override
     public void fetchRecipes(@NonNull final String searchQuery) {
-        interactor.fetchRecipes(Constants.RECIPE_API_KEY, searchQuery)
-                .subscribeOn(Schedulers.newThread())
+        subscriptions.add(interactor.fetchRecipes(searchQuery)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Recipe>>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.d(TAG, "onComplete");
-                    }
-
-                    @Override
-                    public void onError(final Throwable e) {
-                        Log.d(TAG, "onError: " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(final List<Recipe> recipes) {
-                        view.loadRecipes(recipes);
-                    }
-                });
+                .subscribe(recipes -> view.loadRecipes(recipes),
+                        e -> Log.d(TAG, "onError: " + e.getMessage()), () -> Log.d(TAG, "onComplete")));
     }
 
     @Override
     public void onDestroy() {
-
+        subscriptions.unsubscribe();
     }
 
     @Override
