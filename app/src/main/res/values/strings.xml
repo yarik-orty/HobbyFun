@@ -1,3 +1,9 @@
 <resources>
+
     <string name="app_name">HobbyFun</string>
+    <string name="error_server_unavailable">Server not available</string>
+    <string name="error_internet_connection">No internet connection</string>
+
+    <string name="recipes_recipes_text">Recipes</string>
+
 </resources>
