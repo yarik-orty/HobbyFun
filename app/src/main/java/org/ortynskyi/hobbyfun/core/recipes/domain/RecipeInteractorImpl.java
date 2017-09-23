@@ -4,23 +4,22 @@ import android.support.annotation.NonNull;
 
 import org.ortynskyi.hobbyfun.core.recipes.domain.dto.Recipe;
 import org.ortynskyi.hobbyfun.network.RecipeApi;
-import org.ortynskyi.hobbyfun.network.RestApi;
 import org.ortynskyi.hobbyfun.network.model.recipe.RecipeWrapper;
 
 import java.util.List;
 
 import rx.Observable;
 
-public final class RecipeInteractorImpl implements RecipeInteractor {
+public final class RecipeInteractorImpl extends RecipeInteractor {
 
     private final RecipeApi api;
 
     public RecipeInteractorImpl() {
-        api = RestApi.createRecipeApi();
+        api = getRestApi().createRecipeApi();
     }
 
     @Override
-    public Observable<List<Recipe>> fetchRecipes(@NonNull final String key, @NonNull final String query) {
-        return api.searchRecipeList(key, query).map(RecipeWrapper::getRecipes);
+    public Observable<List<Recipe>> fetchRecipes(@NonNull final String query, final int page) {
+        return api.searchRecipeList(getAccessToken(), query, page).map(RecipeWrapper::getRecipes);
     }
 }
