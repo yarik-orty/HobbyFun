@@ -2,6 +2,10 @@ package org.ortynskyi.hobbyfun;
 
 import android.app.Application;
 
-public class HobbyFunApplication extends Application {
+public final class HobbyFunApplication extends Application {
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 }

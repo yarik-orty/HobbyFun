@@ -32,7 +32,7 @@ ext {
     supportVersion = '26.1.0'
     butterKnifeVersion = '8.8.1'
     retrofitVersion = '2.3.0'
-//    firebaseVersion = '11.2.2'
+    firebaseVersion = '11.2.2'
 }
 
 dependencies {
@@ -62,4 +62,9 @@ dependencies {
     compile  'io.reactivex:rxjava-math:1.0.0'
 
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+    compile "com.google.firebase:firebase-core:$firebaseVersion"
+    compile "com.google.firebase:firebase-auth:$firebaseVersion"
+    compile "com.google.firebase:firebase-database:$firebaseVersion"
+    compile "com.google.firebase:firebase-messaging:$firebaseVersion"
 }

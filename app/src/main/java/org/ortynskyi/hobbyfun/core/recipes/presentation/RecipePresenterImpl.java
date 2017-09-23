@@ -1,10 +1,10 @@
 package org.ortynskyi.hobbyfun.core.recipes.presentation;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import org.ortynskyi.hobbyfun.core.recipes.domain.RecipeInteractor;
 import org.ortynskyi.hobbyfun.core.recipes.domain.RecipeInteractorImpl;
+import org.ortynskyi.hobbyfun.utils.Logger;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -24,11 +24,12 @@ public final class RecipePresenterImpl implements RecipePresenter {
 
     @Override
     public void fetchRecipes(@NonNull final String searchQuery, final int page) {
+        view.showProgress(true);
         subscriptions.add(interactor.fetchRecipes(searchQuery, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(recipes -> view.loadRecipes(recipes),
-                        e -> Log.d(TAG, "onError: " + e.getMessage()), () -> Log.d(TAG, "onComplete")));
+                        e -> Logger.d(TAG, "onError: " + e.getMessage()), () -> view.showProgress(false)));
     }
 
     @Override

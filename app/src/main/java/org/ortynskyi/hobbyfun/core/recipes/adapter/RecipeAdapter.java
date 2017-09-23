@@ -31,13 +31,13 @@ public final class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.View
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         return new ViewHolder(LayoutInflater.from(
                 parent.getContext()).inflate(R.layout.item_recipe, parent, false), callback);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final Recipe recipe = recipes.get(position);
         holder.recipeTitle.setText(recipe.getTitle());
         holder.recipeRating.setText(String.valueOf(recipe.getSocialRank()));
@@ -69,8 +69,7 @@ public final class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.View
         public ViewHolder(final View itemView, @NonNull final RecipeListCallback callback) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            recipeCard.setOnClickListener(
-                    view -> callback.onClick(getAdapterPosition()));
+            recipeCard.setOnClickListener(view -> callback.onClick(getAdapterPosition()));
         }
     }
 }

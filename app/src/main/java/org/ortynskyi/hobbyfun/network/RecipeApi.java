@@ -10,15 +10,15 @@ import rx.Observable;
 public interface RecipeApi {
 
     @GET("get")
-    Observable<RecipeDetailWrapper> fetchRecipe(@Query("key") String key,
-                                                @Query("rId") String id);
+    Observable<RecipeDetailWrapper> fetchRecipe(@Query("key") final String key,
+                                                @Query("rId") final String id);
 
     @GET("search")
-    Observable<RecipeWrapper> searchRecipeList(@Query("key") String key,
-                                               @Query("q") String name);
+    Observable<RecipeWrapper> searchRecipeList(@Query("key") final String key,
+                                               @Query("q") final String name);
 
     @GET("search")
-    Observable<RecipeWrapper> searchRecipeList(@Query("key") String key,
-                                                     @Query("q") String name,
-                                                     @Query("page") int page);
+    Observable<RecipeWrapper> searchRecipeList(@Query("key") final String key,
+                                               @Query("q") final String name,
+                                               @Query("page") final int page);
 }
