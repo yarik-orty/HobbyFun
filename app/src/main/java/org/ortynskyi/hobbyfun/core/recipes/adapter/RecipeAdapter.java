@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import org.ortynskyi.hobbyfun.R;
 import org.ortynskyi.hobbyfun.core.recipes.domain.dto.Recipe;
+import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipeListCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +24,16 @@ import butterknife.ButterKnife;
 public final class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     private final List<Recipe> recipes = new ArrayList<>();
+    private final RecipeListCallback callback;
 
-    public RecipeAdapter() {}
+    public RecipeAdapter(@NonNull final RecipeListCallback callback) {
+        this.callback = callback;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         return new ViewHolder(LayoutInflater.from(
-                parent.getContext()).inflate(R.layout.item_recipe, parent, false));
+                parent.getContext()).inflate(R.layout.item_recipe, parent, false), callback);
     }
 
     @Override
@@ -51,6 +54,11 @@ public final class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.View
         notifyDataSetChanged();
     }
 
+    @NonNull
+    public Recipe getRecipe(final int position) {
+        return recipes.get(position);
+    }
+
     static final class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.recipeCard) CardView recipeCard;
@@ -58,11 +66,11 @@ public final class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.View
         @BindView(R.id.recipeRating) TextView recipeRating;
         @BindView(R.id.recipeImage) ImageView recipeImage;
 
-        public ViewHolder(final View itemView) {
+        public ViewHolder(final View itemView, @NonNull final RecipeListCallback callback) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             recipeCard.setOnClickListener(
-                    view -> Toast.makeText(view.getContext(), "Clicked", Toast.LENGTH_SHORT).show());
+                    view -> callback.onClick(getAdapterPosition()));
         }
     }
 }

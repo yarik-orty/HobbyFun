@@ -2,6 +2,8 @@ package org.ortynskyi.hobbyfun.core.recipes.domain.dto;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public final class Recipe {
 
     @SerializedName("recipe_id") private String recipeId;
@@ -12,6 +14,11 @@ public final class Recipe {
     @SerializedName("social_rank") private float socialRank;
     @SerializedName("image_url") private String imageUrl;
     @SerializedName("title") private String title;
+    @SerializedName("ingredients") private List<String> ingredients;
+
+    public List<String> getIngredients() {
+        return ingredients;
+    }
 
     public String getRecipeId() {
         return recipeId;
