@@ -12,7 +12,7 @@ import android.widget.Toast;
 import org.ortynskyi.hobbyfun.HobbyFunApplication;
 import org.ortynskyi.hobbyfun.R;
 import org.ortynskyi.hobbyfun.base.mvp.BaseView;
-import org.ortynskyi.hobbyfun.network.RetrofitException;
+import org.ortynskyi.hobbyfun.network.rx.RetrofitException;
 import org.ortynskyi.hobbyfun.utils.NetworkUtils;
 
 @SuppressLint("Registered")
