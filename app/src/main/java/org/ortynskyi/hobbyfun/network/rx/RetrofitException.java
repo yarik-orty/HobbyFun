@@ -1,4 +1,4 @@
-package org.ortynskyi.hobbyfun.network;
+package org.ortynskyi.hobbyfun.network.rx;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;

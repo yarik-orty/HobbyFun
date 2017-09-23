@@ -15,5 +15,6 @@
     <dimen name="default_elevation_small">2dp</dimen>
     <dimen name="default_elevation_large">6dp</dimen>
     <dimen name="default_empty">0dp</dimen>
+    <dimen name="recipe_item_image_size">164dp</dimen>
 
 </resources>

@@ -3,7 +3,7 @@ package org.ortynskyi.hobbyfun.base.mvp;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
-import org.ortynskyi.hobbyfun.network.RetrofitException;
+import org.ortynskyi.hobbyfun.network.rx.RetrofitException;
 
 public interface BaseView {
 
