@@ -6,5 +6,5 @@ import org.ortynskyi.hobbyfun.base.mvp.BasePresenter;
 
 public interface RecipePresenter extends BasePresenter<RecipeView> {
 
-    void fetchRecipes(@NonNull final String searchQuery);
+    void fetchRecipes(@NonNull final String searchQuery, final int page);
 }

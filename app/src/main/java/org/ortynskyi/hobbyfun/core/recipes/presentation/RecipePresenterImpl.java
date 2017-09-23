@@ -23,8 +23,8 @@ public final class RecipePresenterImpl implements RecipePresenter {
     }
 
     @Override
-    public void fetchRecipes(@NonNull final String searchQuery) {
-        subscriptions.add(interactor.fetchRecipes(searchQuery)
+    public void fetchRecipes(@NonNull final String searchQuery, final int page) {
+        subscriptions.add(interactor.fetchRecipes(searchQuery, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(recipes -> view.loadRecipes(recipes),
@@ -37,7 +37,7 @@ public final class RecipePresenterImpl implements RecipePresenter {
     }
 
     @Override
-    public void attachView(final RecipeView view) {
+    public void attachView(@NonNull final RecipeView view) {
         this.view = view;
     }
 }

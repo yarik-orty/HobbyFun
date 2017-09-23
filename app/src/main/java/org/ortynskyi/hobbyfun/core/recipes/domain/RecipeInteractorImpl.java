@@ -19,7 +19,7 @@ public final class RecipeInteractorImpl extends RecipeInteractor {
     }
 
     @Override
-    public Observable<List<Recipe>> fetchRecipes(@NonNull final String query) {
-        return api.searchRecipeList(getAccessToken(), query).map(RecipeWrapper::getRecipes);
+    public Observable<List<Recipe>> fetchRecipes(@NonNull final String query, final int page) {
+        return api.searchRecipeList(getAccessToken(), query, page).map(RecipeWrapper::getRecipes);
     }
 }

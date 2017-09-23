@@ -11,5 +11,5 @@ import rx.Observable;
 
 public abstract class RecipeInteractor extends Food2ForkInteractor {
 
-    public abstract Observable<List<Recipe>> fetchRecipes(@NonNull final String query);
+    public abstract Observable<List<Recipe>> fetchRecipes(@NonNull final String query, final int page);
 }
