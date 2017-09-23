@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 
 public final class RecipeDetailFragment extends BaseFragment implements RecipeDetailView {
 
-    public static final String ARGS_RECIPE_ID = "ARGS_RECIPE_ID";
+    public static final String ARG_RECIPE_ID = "ARG_RECIPE_ID";
 
     @BindView(R.id.recipeImage) ImageView recipeImage;
     @BindView(R.id.recipeTitle) TextView recipeTitle;
@@ -34,7 +34,7 @@ public final class RecipeDetailFragment extends BaseFragment implements RecipeDe
     public static RecipeDetailFragment newInstance(@NonNull final String recipeId) {
         final RecipeDetailFragment fragment = new RecipeDetailFragment();
         final Bundle args = new Bundle();
-        args.putString(ARGS_RECIPE_ID, recipeId);
+        args.putString(ARG_RECIPE_ID, recipeId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,6 +42,9 @@ public final class RecipeDetailFragment extends BaseFragment implements RecipeDe
     @Override
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() == null || getArguments().getString(ARG_RECIPE_ID) == null) {
+            throw new IllegalStateException("Fragment should be instantiated with newInstance method");
+        }
         presenter = new RecipeDetailPresenterImpl();
         presenter.attachView(this);
     }
@@ -52,7 +55,7 @@ public final class RecipeDetailFragment extends BaseFragment implements RecipeDe
                              @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
         ButterKnife.bind(this, view);
-        final String recipeId = getArguments().getString(ARGS_RECIPE_ID);
+        final String recipeId = getArguments().getString(ARG_RECIPE_ID);
         presenter.getRecipe(recipeId);
         return view;
     }
@@ -62,7 +65,7 @@ public final class RecipeDetailFragment extends BaseFragment implements RecipeDe
         Picasso.with(getContext()).load(recipe.getImageUrl()).into(recipeImage);
         recipeTitle.setText(recipe.getTitle());
         final StringBuilder ingredients = new StringBuilder();
-        for (String buffer : recipe.getIngredients()) {
+        for (final String buffer : recipe.getIngredients()) {
             ingredients.append(buffer).append("\n");
         }
         recipeDescription.setText(ingredients);

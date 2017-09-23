@@ -16,10 +16,6 @@ public final class Recipe {
     @SerializedName("title") private String title;
     @SerializedName("ingredients") private List<String> ingredients;
 
-    public List<String> getIngredients() {
-        return ingredients;
-    }
-
     public String getRecipeId() {
         return recipeId;
     }
@@ -50,5 +46,9 @@ public final class Recipe {
 
     public String getTitle() {
         return title;
+    }
+
+    public List<String> getIngredients() {
+        return ingredients;
     }
 }

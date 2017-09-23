@@ -19,7 +19,7 @@ import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipePresenter;
 import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipePresenterImpl;
 import org.ortynskyi.hobbyfun.core.recipes.presentation.RecipeView;
 import org.ortynskyi.hobbyfun.network.RestApi;
-import org.ortynskyi.hobbyfun.view.EndlessOnScrollListener;
+import org.ortynskyi.hobbyfun.views.EndlessOnScrollListener;
 
 import java.util.List;
 
@@ -28,8 +28,9 @@ import butterknife.ButterKnife;
 
 public final class RecipeListFragment extends BaseFragment implements RecipeView, RecipeListCallback {
 
-    private static final String PIZZA = "pizza";
     public static final String EXTRA_RECIPE_ID = "EXTRA_RECIPE_ID";
+
+    private static final String PIZZA = "pizza";
 
     @BindView(R.id.recipesRecycle) RecyclerView recipesRecycle;
 
@@ -52,7 +53,7 @@ public final class RecipeListFragment extends BaseFragment implements RecipeView
         final View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
         ButterKnife.bind(this, view);
         initAdapter();
-        presenter.fetchRecipes(PIZZA, RestApi.ZERO_PAGE);
+        presenter.fetchRecipes(PIZZA, RestApi.DEFAULT_PAGE);
         return view;
     }
 

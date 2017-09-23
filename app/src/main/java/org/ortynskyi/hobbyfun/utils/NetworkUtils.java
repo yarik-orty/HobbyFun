@@ -5,7 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
-public class NetworkUtils {
+public final class NetworkUtils {
 
     private NetworkUtils() {}
 

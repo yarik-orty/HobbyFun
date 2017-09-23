@@ -1,4 +1,4 @@
-package org.ortynskyi.hobbyfun.view;
+package org.ortynskyi.hobbyfun.views;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
