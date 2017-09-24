@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Default metrics -->
+    <dimen name="default_extra_large_margin">64dp</dimen>
+    <dimen name="default_medium_extra_large_margin">56dp</dimen>
+    <dimen name="default_medium_large_margin">48dp</dimen>
+    <dimen name="default_large_margin">32dp</dimen>
+    <dimen name="default_medium_margin">24dp</dimen>
+    <dimen name="default_margin">16dp</dimen>
+    <dimen name="default_small_margin">8dp</dimen>
+    <dimen name="default_extra_small_margin">4dp</dimen>
+    <dimen name="default_xx_small_margin">2dp</dimen>
+    <dimen name="default_elevation">4dp</dimen>
+    <dimen name="default_elevation_small">2dp</dimen>
+    <dimen name="default_elevation_large">6dp</dimen>
+    <dimen name="default_empty">0dp</dimen>
+    <dimen name="default_medium_text_size">18sp</dimen>
+    <dimen name="recipe_item_image_size">164dp</dimen>
+    <dimen name="recipe_detail_image_height">216dp</dimen>
+
+</resources>
